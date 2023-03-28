@@ -1,0 +1,2 @@
+
+This file acts as placeholder to maintain the directory in git repository as git doesn't support empty directories.
