@@ -4,6 +4,7 @@ Act as reference to initialize repository for new GARAIO Project
 See https://dev.azure.com/garaio/Architecture%20Circle/_wiki/wikis/GARAIO%20Blueprints/573/Source-Code-Governance
 
 # Usage
+- Import the present repository into your new Azure DevOps project
 - Use the [Init-Repository.ps1](/src/init-script/Init-Repository.ps1)
 - Copy the content of the above script in a powershell command prompt
 - Run the following command in your local repository
