@@ -54,7 +54,8 @@ New-File './docs/' $placeHolderFileName
 wget https://raw.githubusercontent.com/github/gitignore/main/VisualStudio.gitignore -O ./.gitignore
 
 # git commit
-git commit -a -m "Initial commit"
+git add *
+git commit -m "Initial commit" --allow-empty
 
 # create default branches
 git checkout -b develop
