@@ -36,9 +36,9 @@ New-File './src/' $placeHolderFileName
 mkdir -p ./src/api
 New-File './src/api/' $placeHolderFileName
 
-wget https://github.com/dotnet/runtime/blob/main/.editorconfig -O ./src/api/.editorconfig
-wget https://github.com/dotnet/runtime/blob/main/eng/CodeAnalysis.src.globalconfig -O ./src/api/CodeAnalysis.src.globalconfig
-wget https://github.com/dotnet/runtime/blob/main/eng/CodeAnalysis.test.globalconfig -O ./src/api/CodeAnalysis.test.globalconfig
+wget https://raw.githubusercontent.com/dotnet/runtime/main/.editorconfig -O ./src/api/.editorconfig
+wget https://raw.githubusercontent.com/dotnet/runtime/main/eng/CodeAnalysis.src.globalconfig -O ./src/api/CodeAnalysis.src.globalconfig
+wget https://raw.githubusercontent.com/dotnet/runtime/main/eng/CodeAnalysis.test.globalconfig -O ./src/api/CodeAnalysis.test.globalconfig
 
 mkdir -p ./src/web
 New-File './src/web/' $placeHolderFileName
