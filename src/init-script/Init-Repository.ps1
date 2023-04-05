@@ -28,7 +28,7 @@ else {
     Write-Host "Use git remote add orgin <url> to add a remote repository"
 }
 
-$placeHolderFileName = 'delete-me.txt'
+$placeHolderFileName = '.gitkeep'
 
 # Initialize the root directories
 mkdir -p ./src
