@@ -36,9 +36,9 @@ New-File './src/' $placeHolderFileName
 mkdir -p ./src/api
 New-File './src/api/' $placeHolderFileName
 
-wget https://raw.githubusercontent.com/dotnet/runtime/main/.editorconfig -O ./src/api/.editorconfig
-wget https://raw.githubusercontent.com/dotnet/runtime/main/eng/CodeAnalysis.src.globalconfig -O ./src/api/CodeAnalysis.src.globalconfig
-wget https://raw.githubusercontent.com/dotnet/runtime/main/eng/CodeAnalysis.test.globalconfig -O ./src/api/CodeAnalysis.test.globalconfig
+Invoke-WebRequest https://raw.githubusercontent.com/dotnet/runtime/main/.editorconfig -O ./src/api/.editorconfig
+Invoke-WebRequest https://raw.githubusercontent.com/dotnet/runtime/main/eng/CodeAnalysis.src.globalconfig -O ./src/api/CodeAnalysis.src.globalconfig
+Invoke-WebRequest https://raw.githubusercontent.com/dotnet/runtime/main/eng/CodeAnalysis.test.globalconfig -O ./src/api/CodeAnalysis.test.globalconfig
 
 mkdir -p ./src/web
 New-File './src/web/' $placeHolderFileName
@@ -56,7 +56,7 @@ New-File './deploy/iac/' $placeHolderFileName
 mkdir -p ./docs
 New-File './docs/' $placeHolderFileName
 
-wget https://raw.githubusercontent.com/github/gitignore/main/VisualStudio.gitignore -O ./.gitignore
+Invoke-WebRequest https://raw.githubusercontent.com/github/gitignore/main/VisualStudio.gitignore -O ./.gitignore
 
 # git commit
 git add .
