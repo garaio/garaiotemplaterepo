@@ -3,7 +3,7 @@ Act as reference for the initialization of new GARAIO source repositories.
 
 # Usage
 - Import the present repository into your new Azure DevOps project and clean-it-up by removing
-  - all `delete-me.txt` files
+  - all `.gitkeep` files
   - `src/init-script/` directory
 - Use the [Init-Repository.ps1](/src/init-script/Init-Repository.ps1) by the following command in an empty directory.
   ```powershell
