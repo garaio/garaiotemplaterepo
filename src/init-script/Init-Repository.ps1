@@ -36,9 +36,7 @@ New-File './src/' $placeHolderFileName
 mkdir -p ./src/api
 New-File './src/api/' $placeHolderFileName
 
-Invoke-WebRequest https://raw.githubusercontent.com/dotnet/runtime/main/.editorconfig -O ./src/api/.editorconfig
-Invoke-WebRequest https://raw.githubusercontent.com/dotnet/runtime/main/eng/CodeAnalysis.src.globalconfig -O ./src/api/CodeAnalysis.src.globalconfig
-Invoke-WebRequest https://raw.githubusercontent.com/dotnet/runtime/main/eng/CodeAnalysis.test.globalconfig -O ./src/api/CodeAnalysis.test.globalconfig
+Invoke-WebRequest https://raw.githubusercontent.com/garaio/garaiotemplaterepo/main/src/api/.editorconfig -O ./src/api/.editorconfig
 
 mkdir -p ./src/web
 New-File './src/web/' $placeHolderFileName
