@@ -4,7 +4,6 @@ Act as reference for the initialization of new GARAIO source repositories.
 # Usage
 The script might be executed within;
 
-## Context
 - A freshly newly created directory on your local machine that will then be pushed to a git origin to start a repository.
 - A already existing empty repository (or almost empty) that has been cloned locally.
 
