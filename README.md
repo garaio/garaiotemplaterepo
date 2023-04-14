@@ -2,14 +2,21 @@
 Act as reference for the initialization of new GARAIO source repositories.
 
 # Usage
-- Import the present repository into your new Azure DevOps project and clean-it-up by removing
-  - all `.gitkeep` files
-  - `src/init-script/` directory
-- Use the [Init-Repository.ps1](/src/init-script/Init-Repository.ps1) by the following command in an empty directory.
-  ```powershell
-   Invoke-Expression (Invoke-WebRequest -Uri https://raw.githubusercontent.com/garaio/garaiotemplaterepo/main/src/init-script/Init-Repository.ps1)
-  ```
-- Once Azure DevOps supports template repositories as GitHub does - use this as a template
+The script might be executed within;
+
+## Context
+- A freshly newly created directory on your local machine that will then be pushed to a git origin to start a repository.
+- A already existing empty repository (or almost empty) that has been cloned locally.
+
+## Procedure
+
+Within the directory you want to setup (either empty or cloned working copy).
+
+Run the [Init-Repository.ps1](/src/init-script/Init-Repository.ps1) within a PowerShell Command Prompt.
+
+```powershell
+ Invoke-Expression (Invoke-WebRequest -Uri https://raw.githubusercontent.com/garaio/garaiotemplaterepo/main/src/init-script/Init-Repository.ps1)
+```
 
 # What it will do
 
