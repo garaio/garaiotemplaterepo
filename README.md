@@ -22,7 +22,7 @@ Run the [Init-Repository.ps1](/src/init-script/Init-Repository.ps1) within a Pow
 The scripts do the following steps
 
 1. Check if the current repository already has `.git`-directory. If none is found `git init` is invoked
-1. Create the structure according to the GARAIO-Blueprint; within each directory a `delete-me.txt` file is created.
+1. Create the structure according to the GARAIO-Blueprint; within each directory a `.gitkeep` file is created that can be later-on deleted once the directory receives its final content.
 1. Place at root of the repository
    - The [VisualStudio.gitignore](https://raw.githubusercontent.com/github/gitignore/main/VisualStudio.gitignore) file
    - A `README.md` file
