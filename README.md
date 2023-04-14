@@ -17,6 +17,41 @@ Run the [Init-Repository.ps1](/src/init-script/Init-Repository.ps1) within a Pow
  Invoke-Expression (Invoke-WebRequest -Uri https://raw.githubusercontent.com/garaio/garaiotemplaterepo/main/src/init-script/Init-Repository.ps1)
 ```
 
+### Pushing the changes
+
+The method to push your changes will depend whether your directory was cloned repository already linked to an existing git remote, or if you have started from an newly locally-created empty directory.
+
+You can check if your local working copy is linked with a git remote by using
+
+```bash
+git remote -v
+```
+Given the repository would be already linked to a remote something like should appear;
+```bash
+user@host garaiotemplaterepo % git remote -v
+origin  https://github.com/garaio/garaiotemplaterepo.git (fetch)
+origin  https://github.com/garaio/garaiotemplaterepo.git (push)
+```
+
+#### Using an existing git remote
+
+```bash
+# Pushes all locally created branches and commits to the already defined remote
+git push --all
+```
+
+#### To connect a working copy to an existing remote
+
+**This will work easily only if the remote doesn't already have commits**
+
+```bash
+git remote add origin {url-to-origin}
+```
+like
+```bash
+git remote add origin https://github.com/garaio/garaiotemplaterepo.git
+```
+
 # What it will do
 
 The scripts do the following steps
