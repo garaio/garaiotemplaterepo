@@ -17,7 +17,20 @@ Run the [Init-Repository.ps1](/src/init-script/Init-Repository.ps1) within a Pow
  Invoke-Expression (Invoke-WebRequest -Uri https://raw.githubusercontent.com/garaio/garaiotemplaterepo/main/src/init-script/Init-Repository.ps1)
 ```
 
-## Pushing the changes
+# What it will do
+
+The scripts do the following steps
+
+1. Check if the current repository already has `.git`-directory. If none is found `git init` is invoked
+1. Create the structure according to the GARAIO-Blueprint; within each directory a `.gitkeep` file is created that can be later-on deleted once the directory receives its final content.
+1. Place at root of the repository
+   - The [VisualStudio.gitignore](https://raw.githubusercontent.com/github/gitignore/main/VisualStudio.gitignore) file
+   - A `README.md` file
+1. Within the `src/web/` directory the [Node.gitignore](https://raw.githubusercontent.com/github/gitignore/main/Node.gitignore) file
+1. Adds to the git index the above files and directories and initate the first commit
+1. Create the `develop/` git branch
+
+# Pushing the changes
 
 The method to push your changes will depend whether your directory was cloned repository already linked to an existing git remote, or if you have started from an newly locally-created empty directory.
 
@@ -51,16 +64,3 @@ like
 ```bash
 git remote add origin https://github.com/garaio/garaiotemplaterepo.git
 ```
-
-# What it will do
-
-The scripts do the following steps
-
-1. Check if the current repository already has `.git`-directory. If none is found `git init` is invoked
-1. Create the structure according to the GARAIO-Blueprint; within each directory a `.gitkeep` file is created that can be later-on deleted once the directory receives its final content.
-1. Place at root of the repository
-   - The [VisualStudio.gitignore](https://raw.githubusercontent.com/github/gitignore/main/VisualStudio.gitignore) file
-   - A `README.md` file
-1. Within the `src/web/` directory the [Node.gitignore](https://raw.githubusercontent.com/github/gitignore/main/Node.gitignore) file
-1. Adds to the git index the above files and directories and initate the first commit
-1. Create the `develop/` git branch
