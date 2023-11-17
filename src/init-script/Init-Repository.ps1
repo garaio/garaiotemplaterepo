@@ -43,7 +43,7 @@ Invoke-WebRequest https://raw.githubusercontent.com/garaio/garaiotemplaterepo/ma
 
 mkdir -p ./src/web
 New-File './src/web/' $placeHolderFileName
-wget https://raw.githubusercontent.com/github/gitignore/main/Node.gitignore -O ./src/web/.gitignore
+Invoke-WebRequest https://raw.githubusercontent.com/github/gitignore/main/Node.gitignore -O ./src/web/.gitignore
 mkdir -p ./src/integration-tests
 New-File './src/integration-tests/' $placeHolderFileName
 
