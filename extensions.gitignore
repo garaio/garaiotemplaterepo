@@ -1,0 +1,8 @@
+# Extensions to the standard .gitignore file from GitHub's VisualStudio.gitignore repo
+
+# OSX
+.DS_Store
+
+# JetBrains Rider
+.idea/
+*.sln.iml
