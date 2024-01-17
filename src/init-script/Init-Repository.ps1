@@ -31,7 +31,7 @@ else {
 $placeHolderFileName = '.gitkeep'
 
 # Download the README.md file
-Invoke-WebRequest https://raw.githubusercontent.com/garaio/garaiotemplaterepo/main/README.sample.devops.md -OutFile ./README.md
+Invoke-WebRequest https://raw.githubusercontent.com/garaio/garaiotemplaterepo/main/README.sample.devops.md -OutFileutFile ./README.md
 
 # Initialize the root directories
 mkdir -p ./src
@@ -39,11 +39,11 @@ New-File './src/' $placeHolderFileName
 mkdir -p ./src/api
 New-File './src/api/' $placeHolderFileName
 
-Invoke-WebRequest https://raw.githubusercontent.com/garaio/garaiotemplaterepo/main/src/api/.editorconfig -O ./src/api/.editorconfig
+Invoke-WebRequest https://raw.githubusercontent.com/garaio/garaiotemplaterepo/main/src/api/.editorconfig -OutFile ./src/api/.editorconfig
 
 mkdir -p ./src/web
 New-File './src/web/' $placeHolderFileName
-Invoke-WebRequest https://raw.githubusercontent.com/github/gitignore/main/Node.gitignore -O ./src/web/.gitignore
+Invoke-WebRequest https://raw.githubusercontent.com/github/gitignore/main/Node.gitignore -OutFile ./src/web/.gitignore
 mkdir -p ./src/integration-tests
 New-File './src/integration-tests/' $placeHolderFileName
 
@@ -57,7 +57,7 @@ New-File './deploy/iac/' $placeHolderFileName
 mkdir -p ./docs
 New-File './docs/' $placeHolderFileName
 
-Invoke-WebRequest https://raw.githubusercontent.com/github/gitignore/main/VisualStudio.gitignore -O ./.gitignore
+Invoke-WebRequest https://raw.githubusercontent.com/github/gitignore/main/VisualStudio.gitignore -OutFile ./.gitignore
 
 # git commit
 git add .
@@ -65,7 +65,7 @@ git commit -m "Init script - commit initial files and directories"
 
 # create dev container
 mkdir -p .devcontainer
-Invoke-WebRequest https://raw.githubusercontent.com/garaio/garaiotemplaterepo/main/.devcontainer/devcontainer.json -O ./.devcontainer/devcontainer.json
+Invoke-WebRequest https://raw.githubusercontent.com/garaio/garaiotemplaterepo/main/.devcontainer/devcontainer.json -OutFile ./.devcontainer/devcontainer.json
 
 git add ./.devcontainer/devcontainer.json
 git commit -m "Init script - add dev container"
