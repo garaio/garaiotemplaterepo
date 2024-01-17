@@ -31,7 +31,7 @@ else {
 $placeHolderFileName = '.gitkeep'
 
 # Download the README.md file
-Invoke-WebRequest https://raw.githubusercontent.com/garaio/garaiotemplaterepo/main/README.sample.devops.md -OutFileutFile ./README.md
+Invoke-WebRequest https://raw.githubusercontent.com/garaio/garaiotemplaterepo/main/README.sample.devops.md -OutFile ./README.md
 
 # Initialize the root directories
 mkdir -p ./src
