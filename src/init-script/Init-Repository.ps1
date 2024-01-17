@@ -62,6 +62,7 @@ Invoke-WebRequest https://raw.githubusercontent.com/github/gitignore/main/Visual
 # Extend the .gitignore file with the content of extensions.gitignore
 Invoke-WebRequest https://raw.githubusercontent.com/garaio/garaiotemplaterepo/main/extensions.gitignore -OutFile ./extensions.gitignore
 Get-Content ./extensions.gitignore | Add-Content ./.gitignore
+Remove-Item ./extensions.gitignore
 
 # git commit
 git add .
