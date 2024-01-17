@@ -63,6 +63,13 @@ Invoke-WebRequest https://raw.githubusercontent.com/github/gitignore/main/Visual
 git add .
 git commit -m "Init script - commit initial files and directories"
 
+# create dev container
+mkdir -p .devcontainer
+Invoke-WebRequest https://raw.githubusercontent.com/garaio/garaiotemplaterepo/main/.devcontainer/devcontainer.json -O ./.devcontainer/devcontainer.json
+
+git add ./.devcontainer/devcontainer.json
+git commit -m "Init script - add dev container"
+
 # create default branches
 git checkout -b develop
 git checkout main
