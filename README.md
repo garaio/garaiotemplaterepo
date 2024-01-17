@@ -7,6 +7,10 @@ The script might be executed within;
 - A freshly newly created directory on your local machine that will then be pushed to a git origin to start a repository.
 - A already existing empty repository (or almost empty) that has been cloned locally.
 
+## Requirements
+
+Ensure you've the git's `user.name` and `user.email` set either localy or globaly prior running the script.
+
 ## Procedure
 
 Within the directory you want to setup (either empty or cloned working copy).
