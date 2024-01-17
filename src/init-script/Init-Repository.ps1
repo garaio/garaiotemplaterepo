@@ -59,6 +59,10 @@ New-File './docs/' $placeHolderFileName
 
 Invoke-WebRequest https://raw.githubusercontent.com/github/gitignore/main/VisualStudio.gitignore -OutFile ./.gitignore
 
+# Extend the .gitignore file with the content of extensions.gitignore
+Invoke-WebRequest https://raw.githubusercontent.com/garaio/garaiotemplaterepo/main/extensions.gitignore -OutFile ./extensions.gitignore
+Get-Content ./extensions.gitignore | Add-Content ./.gitignore
+
 # git commit
 git add .
 git commit -m "Init script - commit initial files and directories"
