@@ -1,5 +1,6 @@
 param (
-    [Switch]$UseFeatureBranch  # Create changes in a feature branch instead of main/develop
+    [Switch]$UseFeatureBranch,  # Create changes in a feature branch instead of main/develop
+    [Switch]$CreateDevelopBranch  # Create a develop branch (legacy workflow)
 )
 
 function New-File {
@@ -103,8 +104,12 @@ if ($UseFeatureBranch -and $isExistingRepo) {
     Write-Host "Changes applied to feature/automated-repo-initialization branch"
     Write-Host "Create a pull request to merge these changes into $defaultBranch"
 }
-else {
-    Write-Host "Creating develop branch from $defaultBranch"
+elseif ($CreateDevelopBranch) {
+    Write-Host "Creating develop branch from $defaultBranch (legacy workflow)"
     git checkout -b develop
     git checkout $defaultBranch
+}
+else {
+    Write-Host "Repository initialized with $defaultBranch branch only"
+    Write-Host "Use tag-based release management with feature/fix branches"
 }
