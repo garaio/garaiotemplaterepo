@@ -17,14 +17,28 @@ Within the directory you want to setup (either empty or cloned working copy).
 
 Run the [Init-Repository.ps1](/src/init-script/Init-Repository.ps1) within a PowerShell Command Prompt.
 
+### Basic Usage
+
 ```powershell
  Invoke-Expression (Invoke-WebRequest -Uri https://raw.githubusercontent.com/garaio/garaiotemplaterepo/main/src/init-script/Init-Repository.ps1)
 ```
+
+### Using Feature Branch (for protected repositories)
+
+If your repository has branch protection enabled on `main`/`master`, use the `-UseFeatureBranch` parameter to create changes in a feature branch:
+
+```powershell
+$scriptContent = Invoke-WebRequest -Uri https://raw.githubusercontent.com/garaio/garaiotemplaterepo/main/src/init-script/Init-Repository.ps1
+Invoke-Expression "& { $($scriptContent.Content) } -UseFeatureBranch"
+```
+
+This creates a `feature/automated-repo-initialization` branch that can be merged via pull request.
 
 # What it will do
 
 The scripts do the following steps
 
+1. Detect the default branch name (`main` or `master`) if in an existing repository
 1. Check if the current repository already has `.git`-directory. If none is found `git init` is invoked
 1. Create the structure according to the GARAIO-Blueprint; within each directory a `.gitkeep` file is created that can be later-on deleted once the directory receives its final content.
 1. Place at root of the repository
@@ -32,7 +46,9 @@ The scripts do the following steps
    - A `README.md` file
 1. Within the `src/web/` directory the [Node.gitignore](https://raw.githubusercontent.com/github/gitignore/main/Node.gitignore) file
 1. Adds to the git index the above files and directories and initate the first commit
-1. Create the `develop/` git branch
+1. Create branches:
+   - **Default mode**: Creates the `develop` branch from the default branch
+   - **Feature branch mode** (`-UseFeatureBranch`): Creates `feature/automated-repo-initialization` branch for pull request workflow
 
 # Pushing the changes
 

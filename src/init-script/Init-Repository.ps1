@@ -1,3 +1,7 @@
+param (
+    [Switch]$UseFeatureBranch  # Create changes in a feature branch instead of main/develop
+)
+
 function New-File {
     param (
         [string]$path,
@@ -16,17 +20,34 @@ function New-File {
     }
 }
 
+function Get-DefaultBranch {
+    $branches = git branch -a 2>$null
+    if ($branches -match '\bmain\b') {
+        return "main"
+    }
+    elseif ($branches -match '\bmaster\b') {
+        return "master"
+    }
+    else {
+        return "main"
+    }
+}
+
 # Check if it is a git repository
+$isExistingRepo = $false
 if (Test-Path './.git') {
     Write-Host "Git repository found"
+    $isExistingRepo = $true
 }
 else {
-    <# Action when all if and elseif conditions are false #>
     Write-Host "Git repository not found"
     Write-Host "Creating a new git repository"
     git init
     Write-Host "Use git remote add orgin <url> to add a remote repository"
 }
+
+$defaultBranch = Get-DefaultBranch
+Write-Host "Default branch detected: $defaultBranch"
 
 $placeHolderFileName = '.gitkeep'
 
@@ -75,6 +96,15 @@ Invoke-WebRequest https://raw.githubusercontent.com/garaio/garaiotemplaterepo/ma
 git add ./.devcontainer/devcontainer.json
 git commit -m "Init script - add dev container"
 
-# create default branches
-git checkout -b develop
-git checkout main
+# create branches based on mode
+if ($UseFeatureBranch -and $isExistingRepo) {
+    Write-Host "Creating feature branch for repository initialization"
+    git checkout -b feature/automated-repo-initialization
+    Write-Host "Changes applied to feature/automated-repo-initialization branch"
+    Write-Host "Create a pull request to merge these changes into $defaultBranch"
+}
+else {
+    Write-Host "Creating develop branch from $defaultBranch"
+    git checkout -b develop
+    git checkout $defaultBranch
+}
