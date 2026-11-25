@@ -47,17 +47,30 @@ Invoke-Expression "& { $($scriptContent.Content) } -CreateDevelopBranch"
 
 The scripts do the following steps
 
-1. Detect the default branch name (`main` or `master`) if in an existing repository
-1. Check if the current repository already has `.git`-directory. If none is found `git init` is invoked
-1. Create the structure according to the GARAIO-Blueprint; within each directory a `.gitkeep` file is created that can be later-on deleted once the directory receives its final content.
+1. Check if the current repository already has `.git`-directory. If none is found `git init -b main` is invoked
+1. Detect the default branch name (remote default branch, `main` or `master`, otherwise the current branch)
+1. When `-UseFeatureBranch` is used on an existing repository, switch to the `feature/automated-repo-initialization` branch **before** committing, so the default branch stays untouched
+1. Create the structure according to the GARAIO-Blueprint; within each directory a `.gitkeep` file is created that can be later-on deleted once the directory receives its final content:
+   ```
+   src/
+     api/                 (+ .editorconfig)
+     web/                 (+ Node .gitignore)
+     integration-tests/
+   deploy/
+     azure-pipelines/
+     iac/
+   docs/
+   ```
 1. Place at root of the repository
-   - The [VisualStudio.gitignore](https://raw.githubusercontent.com/github/gitignore/main/VisualStudio.gitignore) file
-   - A `README.md` file
+   - The [VisualStudio.gitignore](https://raw.githubusercontent.com/github/gitignore/main/VisualStudio.gitignore) file as `.gitignore`, extended with the content of [extensions.gitignore](/extensions.gitignore)
+   - A `README.md` file based on [README.sample.devops.md](/README.sample.devops.md)
+1. Within the `src/api/` directory the [.editorconfig](/src/api/.editorconfig) file
 1. Within the `src/web/` directory the [Node.gitignore](https://raw.githubusercontent.com/github/gitignore/main/Node.gitignore) file
-1. Adds to the git index the above files and directories and initate the first commit
+1. Adds to the git index the above files and directories and initiate the first commit
+1. Add the [dev container definition](/.devcontainer/devcontainer.json) in `.devcontainer/` within a second commit
 1. Create branches:
    - **Default mode**: Sets up repository with `main` branch only (tag-based workflow)
-   - **Feature branch mode** (`-UseFeatureBranch`): Creates `feature/automated-repo-initialization` branch for pull request workflow
+   - **Feature branch mode** (`-UseFeatureBranch`): Commits land on `feature/automated-repo-initialization` for pull request workflow
    - **Legacy mode** (`-CreateDevelopBranch`): Creates `develop` branch for Git Flow workflow
 
 # Branching Strategy
@@ -108,6 +121,12 @@ origin  https://github.com/garaio/garaiotemplaterepo.git (push)
 ```bash
 # Pushes all locally created branches and commits to the already defined remote
 git push --all
+```
+
+When `-UseFeatureBranch` was used, push only the feature branch and open a pull request:
+
+```bash
+git push -u origin feature/automated-repo-initialization
 ```
 
 #### To connect a working copy to an existing remote

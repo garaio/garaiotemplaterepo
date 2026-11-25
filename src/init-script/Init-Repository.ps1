@@ -22,16 +22,28 @@ function New-File {
 }
 
 function Get-DefaultBranch {
-    $branches = git branch -a 2>$null
-    if ($branches -match '\bmain\b') {
+    # 1. Use the remote's default branch when known (e.g. cloned repository)
+    $remoteHead = git symbolic-ref --quiet --short refs/remotes/origin/HEAD 2>$null
+    if ($remoteHead) {
+        return ($remoteHead -replace '^origin/', '')
+    }
+
+    # 2. Look for main/master among local and remote branches
+    $branches = @(git branch -a --format='%(refname:short)' 2>$null)
+    if ($branches -contains 'main' -or $branches -contains 'origin/main') {
         return "main"
     }
-    elseif ($branches -match '\bmaster\b') {
+    if ($branches -contains 'master' -or $branches -contains 'origin/master') {
         return "master"
     }
-    else {
-        return "main"
+
+    # 3. Fall back to the current branch (works on an unborn branch, e.g. after git init)
+    $currentBranch = git symbolic-ref --quiet --short HEAD 2>$null
+    if ($currentBranch) {
+        return $currentBranch
     }
+
+    return "main"
 }
 
 # Check if it is a git repository
@@ -43,12 +55,23 @@ if (Test-Path './.git') {
 else {
     Write-Host "Git repository not found"
     Write-Host "Creating a new git repository"
-    git init
-    Write-Host "Use git remote add orgin <url> to add a remote repository"
+    git init -b main
+    Write-Host "Use git remote add origin <url> to add a remote repository"
 }
 
 $defaultBranch = Get-DefaultBranch
 Write-Host "Default branch detected: $defaultBranch"
+
+if ($UseFeatureBranch) {
+    if ($isExistingRepo) {
+        # Switch to the feature branch BEFORE committing so that the default branch stays untouched
+        Write-Host "Creating feature branch for repository initialization"
+        git checkout -b feature/automated-repo-initialization
+    }
+    else {
+        Write-Warning "-UseFeatureBranch is ignored for newly created repositories; changes are committed to $defaultBranch"
+    }
+}
 
 $placeHolderFileName = '.gitkeep'
 
@@ -99,15 +122,12 @@ git commit -m "Init script - add dev container"
 
 # create branches based on mode
 if ($UseFeatureBranch -and $isExistingRepo) {
-    Write-Host "Creating feature branch for repository initialization"
-    git checkout -b feature/automated-repo-initialization
     Write-Host "Changes applied to feature/automated-repo-initialization branch"
     Write-Host "Create a pull request to merge these changes into $defaultBranch"
 }
 elseif ($CreateDevelopBranch) {
     Write-Host "Creating develop branch from $defaultBranch (legacy workflow)"
-    git checkout -b develop
-    git checkout $defaultBranch
+    git branch develop
 }
 else {
     Write-Host "Repository initialized with $defaultBranch branch only"
